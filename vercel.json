@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "npm --prefix skills/render/scripts/viewer ci",
-  "buildCommand": "EXPLORER_WORKSPACE_ROOT=$PWD EXPLORER_ROOT_DIR=models EXPLORER_DEFAULT_FILE=robotic_hand_end_effector.step npm --prefix skills/render/scripts/viewer run build",
+  "installCommand": "cd skills/render/scripts/viewer && npm ci",
+  "buildCommand": "cd skills/render/scripts/viewer && EXPLORER_WORKSPACE_ROOT=../../../.. EXPLORER_ROOT_DIR=models EXPLORER_DEFAULT_FILE=robotic_hand_end_effector.step npm run build",
   "outputDirectory": "skills/render/scripts/viewer/dist"
 }
