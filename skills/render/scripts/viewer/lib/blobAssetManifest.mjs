@@ -70,6 +70,14 @@ export function normalizeBlobAssetManifest(manifest) {
   };
 }
 
+export function catalogFromBlobAssetManifest(manifest) {
+  const catalog = manifest?.catalog;
+  if (!catalog || typeof catalog !== "object" || Array.isArray(catalog) || !Array.isArray(catalog.entries)) {
+    return null;
+  }
+  return applyBlobAssetManifest(catalog, manifest);
+}
+
 export function readBlobAssetManifest(manifestPath) {
   const resolvedPath = normalizeString(manifestPath);
   if (!resolvedPath) {

@@ -5,6 +5,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import {
   applyBlobAssetManifest,
+  catalogFromBlobAssetManifest,
   readBlobAssetManifest,
   resolveBlobAssetManifestPath,
 } from "./lib/blobAssetManifest.mjs";
@@ -92,6 +93,12 @@ function emptyCatalog(rootDir = DEFAULT_EXPLORER_ROOT_DIR) {
 
 function readCadCatalog(rootDir = buildExplorerRootDir) {
   try {
+    const manifestCatalog = normalizeExplorerRootDir(rootDir) === normalizeExplorerRootDir(buildBlobAssetManifest?.rootDir ?? "")
+      ? catalogFromBlobAssetManifest(buildBlobAssetManifest)
+      : null;
+    if (manifestCatalog) {
+      return withExplorerConfig(manifestCatalog);
+    }
     return withExplorerConfig(scanCadDirectory({ repoRoot, rootDir }));
   } catch {
     return withExplorerConfig(emptyCatalog(rootDir));

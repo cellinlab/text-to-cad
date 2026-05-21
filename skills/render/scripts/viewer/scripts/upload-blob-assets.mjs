@@ -257,6 +257,7 @@ async function main() {
     workspaceRoot: path.basename(workspaceRoot),
     rootDir,
     prefix,
+    catalog,
     assets: Object.fromEntries(uploaded.map((asset) => [
       asset.key,
       {
